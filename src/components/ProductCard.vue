@@ -15,11 +15,11 @@ const toggleFavorito = () => {
 </script>
 
 <template>
-  <v-card flat>
-    <v-img :src="props.product.image" height="200px" cover>
+  <v-card variant="text">
+    <v-img :src="props.product.image" height="250px" cover>
       <v-toolbar color="transparent">
       <template #append>
-        <v-btn :icon="esFavorito ? 'mdi-heart' : 'mdi-heart-outline'" @click="toggleFavorito" :color="esFavorito ? 'red' : 'gray'"></v-btn>
+        <v-btn :icon="esFavorito ? 'mdi-heart' : 'mdi-heart-outline'" @click="toggleFavorito" :color="esFavorito ? 'red' : 'grey'"></v-btn>
       </template>
     </v-toolbar>
     </v-img>

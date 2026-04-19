@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <div>
-    <h1>Footer</h1>
-  </div>
+  <v-footer class="d-flex align-center justify-center">
+    <h6 class="ma-0">2026 - Paulo Gutiérrez</h6>
+  </v-footer>
 </template>
 
 <style scoped>

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useTheme } from 'vuetify';
 import HeaderComp from './components/HeaderComp.vue';
+import FooterComp from './components/FooterComp.vue';
 
 const theme = useTheme()
 const systemTheme = theme.global.name.value
@@ -20,6 +21,7 @@ const changeTheme = () => {
                 <RouterView />
             </v-container>
         </v-main>
+        <FooterComp />
     </v-app>
 </template>
 
