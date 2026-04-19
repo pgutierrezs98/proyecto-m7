@@ -1,5 +1,20 @@
+<script setup>
+import { ref } from 'vue';
+import { useTheme } from 'vuetify';
+import HeaderComp from './components/HeaderComp.vue';
+
+const theme = useTheme()
+const systemTheme = theme.global.name.value
+const selectedTheme = ref(systemTheme)
+
+const changeTheme = () => {
+    selectedTheme.value = selectedTheme.value === 'light' ? 'dark' : 'light'
+}
+</script>
+
 <template>
-    <v-app>
+    <v-app :theme="selectedTheme">
+    <HeaderComp :theme="selectedTheme" @click="changeTheme" />
         <v-main>
             <v-container>
                 <RouterView />
