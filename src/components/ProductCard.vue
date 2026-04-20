@@ -1,27 +1,36 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, computed } from 'vue';
+import { useStore } from 'vuex';
 
-const props = defineProps ({
+const store = useStore();
+
+const props = defineProps({
   product: {
     type: Object,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const esFavorito = ref(false)
-const toggleFavorito = () => {
-  esFavorito.value = !esFavorito.value
-}
+const isFavourite = computed(() =>
+  store.getters['favoritos/isFavourite'](props.product._id),
+);
+const toggleFavourite = () => {
+  store.dispatch('favoritos/toggleFavourite', props.product);
+};
 </script>
 
 <template>
   <v-card variant="text">
     <v-img :src="props.product.image" height="250px" cover>
       <v-toolbar color="transparent">
-      <template #append>
-        <v-btn :icon="esFavorito ? 'mdi-heart' : 'mdi-heart-outline'" @click="toggleFavorito" :color="esFavorito ? 'red' : 'grey'"></v-btn>
-      </template>
-    </v-toolbar>
+        <template #append>
+          <v-btn
+            :icon="isFavourite ? 'mdi-heart' : 'mdi-heart-outline'"
+            @click="toggleFavourite"
+            :color="isFavourite ? 'red' : 'grey'"
+          ></v-btn>
+        </template>
+      </v-toolbar>
     </v-img>
     <v-card-item>
       <v-card-subtitle class="font-weight-semibold">
@@ -37,6 +46,4 @@ const toggleFavorito = () => {
   </v-card>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

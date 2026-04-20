@@ -30,17 +30,29 @@ const onLowestPrice = (value) => store.commit('filtros/SET_LOWEST_PRICE', Number
 const onHighestPrice = (value) => [
   value > 0
     ? store.commit('filtros/SET_HIGHEST_PRICE', Number(value))
-    : store.commit('filtros/SET_HIGHEST_PRICE', Math.max(...store.state.products.products.map((prod) => prod.price))),
+    : store.commit(
+        'filtros/SET_HIGHEST_PRICE',
+        Math.max(...store.state.products.products.map((prod) => prod.price)),
+      ),
 ];
 const resetFilters = () => {
   store.commit('filtros/RESET_FILTERS');
-  store.commit('filtros/SET_HIGHEST_PRICE', Math.max(...store.state.products.products.map((prod) => prod.price)));
+  store.commit(
+    'filtros/SET_HIGHEST_PRICE',
+    Math.max(...store.state.products.products.map((prod) => prod.price)),
+  );
 };
+
+// Favoritos store
+const totalFavourites = computed(() => store.getters['favoritos/totalFavourites']);
 
 onMounted(async () => {
   await store.dispatch('products/fetchProducts');
   // Calcular inmediatamente el precio máximo de todos los productos
-  store.commit('filtros/SET_HIGHEST_PRICE', Math.max(...store.state.products.products.map((prod) => prod.price)));
+  store.commit(
+    'filtros/SET_HIGHEST_PRICE',
+    Math.max(...store.state.products.products.map((prod) => prod.price)),
+  );
   console.log(categorias.value);
 });
 </script>
@@ -88,6 +100,8 @@ onMounted(async () => {
       <v-btn text="Clear filters" block @click="resetFilters"></v-btn>
     </v-col>
   </v-row>
+
+  <p>Favoritos: {{ totalFavourites }}</p>
 
   <div v-if="loading">Cargando productos...</div>
   <div v-else-if="error" class="text-red">{{ error }}</div>
