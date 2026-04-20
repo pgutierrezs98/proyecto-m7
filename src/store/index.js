@@ -1,14 +1,12 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+import products from "./modules/products";
+import filtros from "./modules/filtros";
+import favoritos from "./modules/favoritos";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    products,
+    filtros,
+    favoritos,
+  },
+});
