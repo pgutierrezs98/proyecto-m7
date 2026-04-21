@@ -1,7 +1,6 @@
 <script setup>
 import ProductList from '@/components/ProductList.vue';
-import apiClient from '@/api/apiClient';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -71,6 +70,7 @@ onMounted(async () => {
         item-value="value"
         @update:model-value="onCategory"
         hide-details
+        data-cy="category-filter"
       ></v-select>
     </v-col>
     <v-col cols="12" md="3">
@@ -104,6 +104,6 @@ onMounted(async () => {
   <p>Favoritos: {{ totalFavourites }}</p>
 
   <div v-if="loading">Cargando productos...</div>
-  <div v-else-if="error" class="text-red">{{ error }}</div>
+  <div v-else-if="error" class="text-red" data-test="error-msg">{{ error }}</div>
   <ProductList v-else :products="productosFiltrados" />
 </template>
